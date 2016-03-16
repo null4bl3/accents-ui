@@ -1,5 +1,6 @@
 @import "ui-variables";
-@tab-indicator-size: 5px;
+@modified-icon-dim: 6px;
+@tab-indicator-size: 3px;
 @vertical-center: @tab-height - @tab-indicator-size;
 
 @-webkit-keyframes pulse {
@@ -22,12 +23,11 @@
     box-shadow: none;
 
     .tab {
-        font-size: @font-size;
         line-height: @vertical-center;
         color: @text-color;
-        padding-left: 15px;
+        padding-left: 5px;
         background: @tab-background-color;
-        border-bottom: @tab-indicator-size solid @accent-color-subtle;
+        border-bottom: @tab-indicator-size solid #41764B;
         transition: background-color 0.3s, border-color 0.3s, color 0.3s;
 
         &:not(:last-child):after {
@@ -44,36 +44,24 @@
         }
 
         .close-icon {
-            // unfortunately a bit hacky here, to line up the "edited" status of tabs and the close button.
-            & when (@font-size > 15) {
-                top: -1px;
-            }
-            & when (@font-size > 10) and (@font-size < 16) {
-                top: 1px;
-            }
-            & when (@font-size < 11) {
-                top: 2px;
-            }
+            top: 0px;
 
             &:before {
-                text-align: center;
-                content: '+';
-                font-family: 'Georgia', serif;
-                width: 13px;
-                height: 13px;
-                line-height: 11px;
-                transition: color 0.6s;
-                transform: rotate(45deg);
-                color: transparent;
-                font-size: 17px;
+                    transition: color 0.6s;
+                    content: '\00D7'; // Unicode Character 'MULTIPLICATION SIGN'
+                    font-size: 9px;
+                    font-family: Verdana, sans-serif;
+                    position: relative;
+                    bottom: 1px;
+                    color: transparent;
             }
         }
         &.modified:not(:hover) .close-icon {
-            top: @tab-height / 2 - 4;
-            border-radius: 7px;
-            width: 7px;
-            height: 7px;
-            right: 13px;
+            top: @tab-height / 2 - @modified-icon-dim / 2 - 1px;
+            right: 15px;
+            width: @modified-icon-dim;
+            height: @modified-icon-dim;
+            border-radius: @modified-icon-dim;
             background: @accent-color;
             border: none;
             -webkit-animation-name: pulse;
@@ -87,15 +75,15 @@
 
         .close-icon {
             &:before {
-                color: @text-color-highlight !important;
+                color: @text-color-highlight;
             }
         }
         &.modified .close-icon {
-            top: @tab-height / 2 - 4;
-            width: 7px;
-            height: 7px;
-            right: 13px;
-            border-radius: 7px;
+            top: @tab-height / 2 - @modified-icon-dim / 2 - 1px;
+            right: 15px;
+            width: @modified-icon-dim;
+            height: @modified-icon-dim;
+            border-radius: @modified-icon-dim;
             background: @accent-color;
             border: none;
 
@@ -108,7 +96,7 @@
         z-index: 10;
         color: @text-color-highlight;
         background-color: @tab-background-color-active;
-        border-color: @accent-color;
+        border-color: #50BB67;
         box-shadow: 0 0 7px darken(@tab-background-color, 4%);
 
         .close-icon {
